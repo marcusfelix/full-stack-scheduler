@@ -1,10 +1,17 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { UserProvider } from './context/user';
+import App from './App';
 import './index.css'
-import App from './App.tsx'
+import '@fontsource-variable/inter';
+import { ToastProvider } from './context/toast';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <UserProvider>
+      <ToastProvider>
+        <App />
+      </ToastProvider>
+    </UserProvider>
   </StrictMode>,
 )
