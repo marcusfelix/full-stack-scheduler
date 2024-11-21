@@ -10,5 +10,7 @@ Nothing fancy but some cool aspects:
 
 ## To-do
 [ ] Extend `Toast` to handle messages Simultaneously
+
 [ ] Display `Event` details on "/done" route
+
 [ ] Implement better `Auth`: Refresh tokens? 
