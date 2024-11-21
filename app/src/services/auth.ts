@@ -3,7 +3,7 @@ import fetchApi from "./api"
 export const AuthService = {
   path: '/api/auth',
   login(email: string, password: string) {
-    return fetchApi<User>({
+    return fetchApi<Token>({
       url: `${this.path}/login`,
       options: {
         method: 'POST',
