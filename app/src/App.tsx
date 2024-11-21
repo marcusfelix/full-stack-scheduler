@@ -1,12 +1,18 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useUserContext } from "./context/user";
 import Auth from "./pages/auth";
+import New from "./pages/new";
+import Done from "./pages/done";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <New />,
   },
+  {
+    path: "/done",
+    element: <Done />
+  }
 ]);
 
 const App = () => {
