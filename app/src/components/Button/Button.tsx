@@ -1,12 +1,18 @@
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
+  scheme?: "action" | "secondary"
 }
 
-const Input: React.FC<Props> = ({ label, ...props }) => {
+const colors = {
+  action: "bg-black text-white",
+  secondary: "bg-gray-200 text-gray-600"
+}
+
+const Input: React.FC<Props> = ({ label, scheme = "action", ...props }) => {
 
   return <button
     type="button"
-    className="bg-black text-white px-6 py-3 rounded-full text-sm font-semibold"
+    className={`${colors[scheme]} px-6 py-3 rounded-full text-sm font-semibold`}
     {...props}>
     {label}
   </button>
