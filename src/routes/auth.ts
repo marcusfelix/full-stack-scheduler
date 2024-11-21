@@ -38,7 +38,7 @@ router.post('/create', async (req, res) => {
 
     const data = await prisma.user.create({
       data: user
-    })
+    });
 
     res.json({
       id: data.id,
@@ -56,14 +56,6 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (!validateEmail(email)) {
-      throw new Error('e-mail not valid')
-    }
-
-    if (!validatePassword(password)) {
-      throw new Error('password must have at least 8 characters, one uppercase character and one symbol')
-    }
-
     const data = await prisma.user.findUnique({
       where: {
         email: email
@@ -71,14 +63,17 @@ router.post('/login', async (req, res) => {
     });
 
     if (!data) {
-      throw new Error('e-mail or password are incorrect');
+      throw new Error('e-mail or password is incorrect');
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, data?.password);
 
     if (!isPasswordCorrect) {
-      throw new Error('e-mail or password are incorrect');
+      throw new Error('e-mail or password is incorrect');
     }
+
+    // Remove password field
+    data.password = '';
 
     const token = jwt.sign(
       data,
