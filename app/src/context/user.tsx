@@ -1,5 +1,5 @@
 import React, { ReactNode, useContext, useState } from "react";
-import { parseLocalUser, writeLocalUser } from "../utils/user";
+import { parseJwt, parseLocalUser, writeLocalUser } from "../utils/user";
 import { AuthService } from "../services/auth";
 
 interface UserContextType {
@@ -28,9 +28,10 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
   const login = async (email: string, password: string): Promise<User | Error> => {
     try {
       const data = await AuthService.login(email, password);
-      writeLocalUser(data)
-      setUser(data);
-      return data;
+      const user = parseJwt(data.token);
+      writeLocalUser(user)
+      setUser(user);
+      return user;
     } catch (error: unknown) {
       return (error as Error);
     }
