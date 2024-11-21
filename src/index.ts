@@ -1,9 +1,9 @@
 import express from "express";
 import auth from "./routes/auth";
 import events from "./routes/events";
-import chat from "./routes/chat";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import cors from "cors";
 
 // Initialize Express app
 const app = express();
@@ -21,14 +21,14 @@ if (!process.env.DATABASE_URL) {
 }
 
 app.use(bodyParser.json());
+app.use(cors());
 
 // Setup static app file route
-app.get('/', express.static('app/dist'))
+app.get('/', express.static('app/dist'));
 
 // Setup API endpoints
 app.use('/api/auth', auth);
 app.use('/api/events', events);
-app.use('/api/chat', chat);
 
 // Start server
 app.listen(port, () => console.log(`Server listening on port ${port}`))

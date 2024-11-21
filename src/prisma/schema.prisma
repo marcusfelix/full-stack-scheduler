@@ -11,32 +11,20 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(uuid())
-  email    String    @unique
+  id       String   @id @default(uuid())
+  email    String   @unique
   password String
-  type     String    @default("USER")
+  type     String   @default("USER")
   events   Event[]
-  messages Message[]
-  created  DateTime  @default(now())
+  created  DateTime @default(now())
 }
 
 model Event {
-  id          String    @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
   description String
   when        DateTime
-  author      User      @relation(fields: [uid], references: [id])
+  author      User     @relation(fields: [uid], references: [id])
   uid         String
-  messages    Message[]
-  created     DateTime  @default(now())
-}
-
-model Message {
-  id      String   @id @default(uuid())
-  body    String
-  author  User     @relation(fields: [uid], references: [id])
-  uid     String
-  event   Event    @relation(fields: [eid], references: [id])
-  eid     String
-  created DateTime @default(now())
+  created     DateTime @default(now())
 }
