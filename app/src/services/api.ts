@@ -6,15 +6,11 @@ export default async function fetchApi<T>(options: { url: string, options?: Requ
     const body = options.body && options.options?.method !== 'GET' ? JSON.stringify(options.body) : undefined;
     const token = parseLocalUser()?.token;
 
-    if (!token) {
-      throw new Error('missing auth token (session expired?)');
-    }
-
     const request = await fetch(`${baseUrl}${options.url}`, {
       ...options.options,
       headers: {
         'Content-Type': 'application/json',
-        'X-Auth': token
+        'X-Auth': token ?? ""
       },
       body: body
     });
