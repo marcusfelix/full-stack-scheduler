@@ -31,7 +31,7 @@ const Toast: React.FC<Props> = ({ id, message, scheme, close }) => {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => handleClose, toastTimeout);
+    const timer = setTimeout(handleClose, toastTimeout);
     const fadeInTimer = setTimeout(() => setActive(true), 0);
 
     return () => {
@@ -41,6 +41,7 @@ const Toast: React.FC<Props> = ({ id, message, scheme, close }) => {
   }, [])
 
   const handleClose = async () => {
+    console.log("handle close")
     setActive(false)
     await new Promise((resolve) => setTimeout(resolve, 100));
     close(id);
