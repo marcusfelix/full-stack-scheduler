@@ -9,7 +9,7 @@ Nothing fancy but some cool aspects:
 - Abstracted service calls
 
 ## To-do
-[ ] Extend `Toast` to handle messages Simultaneously
+[X] Extend `Toast` to handle messages Simultaneously
 
 [ ] Display `Event` details on "/done" route
 
